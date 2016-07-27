@@ -1,0 +1,152 @@
+<div>
+
+    <form role="form" action="/scripts/registration.php" method="POST">
+
+        <h2 class="form-signin-heading">Please register</h2>
+        <div id="usernameWarningAlert" class="alert alert-danger" style="display:none;"></div>
+        <div id="emailWarningAlert" class="alert alert-danger" style="display:none;"></div>
+
+        <div class="form-group">
+            <label class="sr-only">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Email" required="" onkeyup="showUserEmail(this.value)" autofocus="">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label class="sr-only">Username</label>
+            <input type="text" name="username" class="form-control" placeholder="Username" required="" onkeyup="showUser(this.value)" autofocus="">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label class="sr-only">first name</label>
+            <input type="text" name="firstname" class="form-control" placeholder="Firstname" required="">
+        </div>
+        <div class="form-group">
+            <label class="sr-only">Last name</label>
+            <input type="text" name="lastname" class="form-control" placeholder="Lastname" required="">
+        </div>
+        <div class="form-group">
+            <label class="sr-only">Street and number</label>
+            <input type="text" name="adres" class="form-control" placeholder="Street and number" required="">
+        </div>
+        <div class="form-group">
+            <label class="sr-only">Postal code</label>
+            <input type="text" name="postalcode" class="form-control" placeholder="Postal code" required="">
+        </div>
+        <div class="form-group">
+            <label class="sr-only">City</label>
+            <input type="text" name="city" class="form-control" placeholder="City" required="">
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="sr-only">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Password" required="">
+        </div>
+        <div class="form-group">
+            <label class="sr-only">Password verification</label>
+            <input type="password" id="passwordVerification" class="form-control" placeholder="Password verification" required="">
+        </div>
+        <div id="validate-status"></div>
+        <div class="form-group">
+            <br>
+            <button id="registerBtn" class="btn btn-lg btn-danger btn-block" type="submit">Register</button>
+
+    </form>
+    <br>
+
+    </div>
+    <script>
+        function showUser(str) {
+            console.log("runing");
+            var warningDiv = document.getElementById("usernameWarningAlert");
+            var registerBtn = document.getElementById("registerBtn");
+            if (str == "") {
+                warningDiv.innerHTML = "";
+                return;
+            } else {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        //  if(xmlhttp.responseText '1'){
+                        if (xmlhttp.responseText.indexOf('1') > -1) {
+                            warningDiv.style.display = "Block"
+                            warningDiv.innerHTML = "Username already taken";
+                            registerBtn.disabled = true;
+                            //Todo this also is a contains
+                        } else {
+                            warningDiv.style.display = "None"
+                            warningDiv.innerHTML = "";
+                            registerBtn.disabled = false;
+                            //this isn;t working
+                        }
+                        //  console.log(xmlhttp.responseText);
+                    }
+                };
+                xmlhttp.open("GET", "/content/ajaxscript/usernamecheck.php?username=" + str, true);
+                xmlhttp.send();
+            }
+        }
+
+        function showUserEmail(str) {
+            console.log("runing");
+            var warningDiv = document.getElementById("emailWarningAlert");
+            var registerBtn = document.getElementById("registerBtn");
+            if (str == "") {
+                warningDiv.innerHTML = "";
+                return;
+            } else {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                      console.log("responseText : " + xmlhttp.responseText);
+                        //  if(xmlhttp.responseText '1'){
+                        if (xmlhttp.responseText.indexOf('1') > -1) {
+                            warningDiv.style.display = "Block"
+                            warningDiv.innerHTML = "Email already taken";
+                            registerBtn.disabled = true;
+                            //Todo this also is a contains
+                        } else {
+                            warningDiv.style.display = "None"
+                            warningDiv.innerHTML = "";
+                            registerBtn.disabled = false;
+                            //this isn;t working
+                        }
+                        //  console.log(xmlhttp.responseText);
+                    }
+                };
+                xmlhttp.open("GET", "/content/ajaxscript/emailcheck.php?email=" + str, true);
+                xmlhttp.send();
+            }
+        }
+
+
+        $(document).ready(function() {
+            $("#passwordVerification").keyup(validate);
+        });
+        function validate() {
+            var password1 = $("#password").val();
+            var password2 = $("#passwordVerification").val();
+
+            if (password1 == password2) {
+                $("#validate-status").text("Valid password");
+                $("#validate-status").removeClass().addClass('alert alert-success');
+            } else {
+                $("#validate-status").text("Invalid password");
+                $("#validate-status").removeClass().addClass('alert alert-danger');
+            }
+
+        }
+    </script>
