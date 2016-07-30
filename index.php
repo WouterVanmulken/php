@@ -42,16 +42,16 @@ if (session_status() == PHP_SESSION_NONE) {
     if (isset($_REQUEST["ERROR"])) {
         echo '<div id="errorAlert" class="alert alert-danger" >' . $_REQUEST["ERROR"] . '</div>';
     }
-    if (isset($_REQUEST["SUCCES"])) {
-        echo '<div id="succesAlert" class="alert alert-success" >' . $_REQUEST["SUCCES"] . '</div>';
+    if (isset($_REQUEST["SUCCESS"])) {
+        echo '<div id="succesAlert" class="alert alert-success" >' . $_REQUEST["SUCCESS"] . '</div>';
     }
 
-    $_REQUEST['page'] = 'content/' . $_REQUEST['page'];
-    $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 'content/home.html';
-    $path = $page;
-    if (file_exists($path)) {
+    // $_REQUEST['page'] = 'content/' . $_REQUEST['page'];
+    $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 'home.html';
+    $page = 'content/' . $page;
+    if (file_exists($page)) {
         echo '<div style="background: white; padding: 16px" class="container">';
-        include $path;
+        include $page;
         echo "</div>";
     } else {
         //  include 'pages/404.php';

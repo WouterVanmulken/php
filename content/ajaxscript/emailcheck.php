@@ -7,7 +7,7 @@ if (!$con) {
     die('Could not connect: ' . mysqli_error($con));
 }
 
-$sql="SELECT count(*) as count FROM users WHERE email = '" . $email . "' limit 1;";
+$sql="SELECT count(*) as count FROM users WHERE email = LOWER('" . $email . "') limit 1;";
 
 $result = $con->query($sql);
 $count = -1;

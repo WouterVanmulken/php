@@ -8,16 +8,13 @@ $conn = makeConnection();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  login($_POST["username"],$_POST["password"], $conn);
-  $_REQUEST["SUCCES"] = "Succesfully logged in.";
+
+  $link = login($_POST["username"],$_POST["password"], $conn);
+  echo $link;
+  header($link);
+  die();
+
 }else{
-  echo "please only use a post request";
+  echo "something went wrong pls don't do this.";
 }
-
-header("Location: index.php");
-die();
  ?>
-
-<!--
-</body>
-</html> -->

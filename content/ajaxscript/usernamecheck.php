@@ -8,7 +8,7 @@ if (!$con) {
 }
 
 mysqli_select_db($con,"ajax_demo");
-$sql="SELECT count(*) as count FROM users WHERE username = '" . $username . "' limit 1;";
+$sql="SELECT count(*) as count FROM users WHERE username = LOWER('" . $username . "') limit 1;";
 
 $result = $con->query($sql);
 $count = -1;
