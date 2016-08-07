@@ -1,0 +1,52 @@
+    <script type="text/javascript" src="content/game.js"></script>
+    <style>
+        div.a {
+            position: fixed;
+        }
+    </style>
+<div style="background: white; padding: 16px" class="container">
+    <H1>Click the dickbutt</H1>
+    <div>Time: <span id="time"></span></div>
+    <button class="btn" onclick="start()">Start</button>
+    <button class="btn" onclick="stop()">Stop</button>
+    <button class="btn" onMouseDown="setEasy()">Set to easy</button>
+    <button class="btn" onMouseDown="setMedium()">Set to medium</button>
+    <button class="btn" onclick="setHard()">Set to hard</button>
+
+    <div class='a' onmousedown="test()">
+      <img id="img" src="content/dickbutt.gif" width="100px" height="100px" />
+    </div>
+  </div>
+
+
+    <script type="text/javascript">
+      show();
+      startStopwatch();
+
+      var myVar = setInterval(myTimer, 1);
+      var r = 0;
+      var g = 0;
+      var b = 0;
+      function myTimer() {
+        if(r == g){
+          r= (r+1)%255;
+        }else if(g==b){
+          g= (g+1)%255
+        }else{
+          b= (b+1)%255
+        }
+
+        // document.body.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+        //
+        // var red, green, blue;
+        //
+        // for (red = 0; red <= 255; red++) {
+        //     for (green = 0; green <= 255; green++) {
+        //         for (blue = 0; blue <= 255; blue++) {
+        //             // rgb(red, green, blue)
+        //             document.body.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+        //         }
+        //     }
+        // }
+      }
+    </script>
