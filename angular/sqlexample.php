@@ -3,6 +3,7 @@
    <title>AngularJS GET request with PHP</title>
      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+
    </head>
 
    <body>
@@ -30,6 +31,7 @@
          </div>
        </div>
      </div>
+
    </body>
 
    <script>
